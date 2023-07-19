@@ -10,7 +10,12 @@ final routerProvider = Provider(
     routes: <RouteBase>[
       GoRoute(
         path: DetailPage.routeName,
-        builder: (context, state) => const DetailPage(),
+        builder: (context, state) => DetailPage(
+          title: state.pathParameters['title'] ?? '',
+          byline: state.pathParameters['byline'] ?? '',
+          imageUrl: state.pathParameters['imageUrl'] ?? '',
+          publishedDate: state.pathParameters['publishedDate'].toString(),
+        ),
       ),
       GoRoute(
         path: HomePage.routeName,

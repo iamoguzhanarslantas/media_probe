@@ -1,11 +1,18 @@
+import 'dart:convert';
+
+import 'package:media_probe/src/common/common.dart' show BaseModel;
+
+ArticleModel articlesFromJson(String str) =>
+    ArticleModel.fromJson(json.decode(str));
+
 class ArticleModel {
   String? uri;
   String? url;
   int? id;
   int? assetId;
   String? source;
-  String? publishedDate;
-  String? updated;
+  DateTime? publishedDate;
+  DateTime? updated;
   String? section;
   String? subsection;
   String? nytdsection;
@@ -14,97 +21,72 @@ class ArticleModel {
   String? byline;
   String? type;
   String? title;
-  String? abstract;
-  List<String>? desFacet;
-  List<String>? orgFacet;
-  List<String>? perFacet;
-  List<String>? geoFacet;
-  List<Media>? media;
+  String? articlesAbstract;
+  List<String?>? desFacet;
+  List<String?>? orgFacet;
+  List<String?>? perFacet;
+  List<dynamic>? geoFacet;
+  List<Media?>? media;
   int? etaId;
 
   ArticleModel({
-    this.uri,
-    this.url,
-    this.id,
-    this.assetId,
-    this.source,
-    this.publishedDate,
-    this.updated,
-    this.section,
-    this.subsection,
-    this.nytdsection,
-    this.adxKeywords,
+    required this.uri,
+    required this.url,
+    required this.id,
+    required this.assetId,
+    required this.source,
+    required this.publishedDate,
+    required this.updated,
+    required this.section,
+    required this.subsection,
+    required this.nytdsection,
+    required this.adxKeywords,
     this.column,
-    this.byline,
-    this.type,
-    this.title,
-    this.abstract,
-    this.desFacet,
-    this.orgFacet,
-    this.perFacet,
-    this.geoFacet,
-    this.media,
-    this.etaId,
+    required this.byline,
+    required this.type,
+    required this.title,
+    required this.articlesAbstract,
+    required this.desFacet,
+    required this.orgFacet,
+    required this.perFacet,
+    required this.geoFacet,
+    required this.media,
+    required this.etaId,
   });
 
-  ArticleModel.fromJson(Map<String, dynamic> json) {
-    uri = json['uri'];
-    url = json['url'];
-    id = json['id'];
-    assetId = json['asset_id'];
-    source = json['source'];
-    publishedDate = json['published_date'];
-    updated = json['updated'];
-    section = json['section'];
-    subsection = json['subsection'];
-    nytdsection = json['nytdsection'];
-    adxKeywords = json['adx_keywords'];
-    column = json['column'];
-    byline = json['byline'];
-    type = json['type'];
-    title = json['title'];
-    abstract = json['abstract'];
-    desFacet = json['des_facet'].cast<String>();
-    orgFacet = json['org_facet'].cast<String>();
-    perFacet = json['per_facet'].cast<String>();
-    perFacet = json['geo_facet'].cast<String>();
-    if (json['media'] != null) {
-      media = <Media>[];
-      json['media'].forEach((v) {
-        media!.add(Media.fromJson(v));
-      });
-    }
-    etaId = json['eta_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['uri'] = uri;
-    data['url'] = url;
-    data['id'] = id;
-    data['asset_id'] = assetId;
-    data['source'] = source;
-    data['published_date'] = publishedDate;
-    data['updated'] = updated;
-    data['section'] = section;
-    data['subsection'] = subsection;
-    data['nytdsection'] = nytdsection;
-    data['adx_keywords'] = adxKeywords;
-    data['column'] = column;
-    data['byline'] = byline;
-    data['type'] = type;
-    data['title'] = title;
-    data['abstract'] = abstract;
-    data['des_facet'] = desFacet;
-    data['org_facet'] = orgFacet;
-    data['per_facet'] = perFacet;
-    data['geo_facet'] = geoFacet;
-    if (media != null) {
-      data['media'] = media!.map((v) => v.toJson()).toList();
-    }
-    data['eta_id'] = etaId;
-    return data;
-  }
+  factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
+        uri: BaseModel.stringConverter(json["uri"]),
+        url: BaseModel.stringConverter(json["url"]),
+        id: BaseModel.intConverter(json["id"]),
+        assetId: BaseModel.intConverter(json["asset_id"]),
+        source: BaseModel.stringConverter(json["source"]),
+        publishedDate: BaseModel.dateConverter(json["published_date"]),
+        updated: BaseModel.dateConverter(json["updated"]),
+        section: BaseModel.stringConverter(json["section"]),
+        subsection: BaseModel.stringConverter(json["subsection"]),
+        nytdsection: BaseModel.stringConverter(json["nytdsection"]),
+        adxKeywords: BaseModel.stringConverter(json["adx_keywords"]),
+        column: json["column"],
+        byline: BaseModel.stringConverter(json["byline"]),
+        type: BaseModel.stringConverter(json["type"]),
+        title: BaseModel.stringConverter(json["title"]),
+        articlesAbstract: BaseModel.stringConverter(json["abstract"]),
+        desFacet: BaseModel.listConverter(json["des_facet"])
+            .map((e) => e.toString())
+            .toList(),
+        orgFacet: BaseModel.listConverter(json["org_facet"])
+            .map((e) => e.toString())
+            .toList(),
+        perFacet: BaseModel.listConverter(json["per_facet"])
+            .map((e) => e.toString())
+            .toList(),
+        geoFacet:
+            BaseModel.listConverter(json["geo_facet"]).map((e) => e).toList(),
+        media: BaseModel.listConverter(json["media"], fallbackValue: [])
+            .map((e) => Media.fromJson(e))
+            .toList(),
+        etaId: BaseModel.intConverter(json["eta_id"]),
+      );
 }
 
 class Media {
@@ -113,65 +95,65 @@ class Media {
   String? caption;
   String? copyright;
   int? approvedForSyndication;
-  List<MediaMetadata>? mediaMetadata;
+  List<MediaMetadatum> mediaMetadata;
 
-  Media(
-      {this.type,
-      this.subtype,
-      this.caption,
-      this.copyright,
-      this.approvedForSyndication,
-      this.mediaMetadata});
+  Media({
+    required this.type,
+    required this.subtype,
+    required this.caption,
+    required this.copyright,
+    required this.approvedForSyndication,
+    required this.mediaMetadata,
+  });
 
-  Media.fromJson(Map<String, dynamic> json) {
-    type = json['type'];
-    subtype = json['subtype'];
-    caption = json['caption'];
-    copyright = json['copyright'];
-    approvedForSyndication = json['approved_for_syndication'];
-    if (json['media-metadata'] != null) {
-      mediaMetadata = <MediaMetadata>[];
-      json['media-metadata'].forEach((v) {
-        mediaMetadata!.add(MediaMetadata.fromJson(v));
-      });
-    }
-  }
+  factory Media.fromJson(Map<String, dynamic> json) => Media(
+        type: BaseModel.stringConverter(json["type"]),
+        subtype: BaseModel.stringConverter(json["subtype"]),
+        caption: BaseModel.stringConverter(json["caption"]),
+        copyright: BaseModel.stringConverter(json["copyright"]),
+        approvedForSyndication:
+            BaseModel.intConverter(json["approved_for_syndication"]),
+        mediaMetadata:
+            BaseModel.listConverter(json["media-metadata"], fallbackValue: [])
+                .map((e) => MediaMetadatum.fromJson(e))
+                .toList(),
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['type'] = type;
-    data['subtype'] = subtype;
-    data['caption'] = caption;
-    data['copyright'] = copyright;
-    data['approved_for_syndication'] = approvedForSyndication;
-    if (mediaMetadata != null) {
-      data['media-metadata'] = mediaMetadata!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "subtype": subtype,
+        "caption": caption,
+        "copyright": copyright,
+        "approved_for_syndication": approvedForSyndication,
+        "media-metadata":
+            List<dynamic>.from(mediaMetadata.map((x) => x.toJson())),
+      };
 }
 
-class MediaMetadata {
+class MediaMetadatum {
   String? url;
   String? format;
   int? height;
   int? width;
 
-  MediaMetadata({this.url, this.format, this.height, this.width});
+  MediaMetadatum({
+    required this.url,
+    required this.format,
+    required this.height,
+    required this.width,
+  });
 
-  MediaMetadata.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-    format = json['format'];
-    height = json['height'];
-    width = json['width'];
-  }
+  factory MediaMetadatum.fromJson(Map<String, dynamic> json) => MediaMetadatum(
+        url: BaseModel.stringConverter(json["url"], fallbackValue: ''),
+        format: BaseModel.stringConverter(json["format"]),
+        height: BaseModel.intConverter(json["height"]),
+        width: BaseModel.intConverter(json["width"]),
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['url'] = url;
-    data['format'] = format;
-    data['height'] = height;
-    data['width'] = width;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "url": url,
+        "format": format,
+        "height": height,
+        "width": width,
+      };
 }
