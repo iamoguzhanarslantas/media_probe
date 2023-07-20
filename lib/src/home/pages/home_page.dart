@@ -68,8 +68,10 @@ class HomePage extends ConsumerWidget {
                             ),
                             leading: CircleAvatar(
                               backgroundImage: NetworkImage(
-                                data.media?[0]?.mediaMetadata[0].url ??
-                                    'assets/images/white.png',
+                                (data.media != null && data.media!.isNotEmpty)
+                                    ? data.media![0]?.mediaMetadata[0].url ??
+                                        'assets/images/white.png'
+                                    : 'assets/images/white.png',
                               ),
                               backgroundColor: Colors.grey,
                               onBackgroundImageError: (exception, stackTrace) {

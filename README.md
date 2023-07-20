@@ -1,16 +1,48 @@
-# media_probe
+# Media Probe Mobile App
 
-A new Flutter project.
+Media Probe is a revolutionizing online media. They aim to be the one stop shop for all relevant media
+articles, which can be personalised to users. They aim to reach all corners of the globe and be easily
+accessible. They have requested for a mobile application.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Run Locally
 
-A few resources to get you started if this is your first Flutter project:
+Clone the project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+  git clone [https://link-to-project](https://github.com/iamoguzhanarslantas/media_probe.git)
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Go to the project directory and get third part packages
+
+```bash
+  flutter pub get
+```
+
+
+## Tech Stack
+
+**Client:** Flutter, Riverpod
+
+
+
+
+## Technical Features
+
+- MVC
+
+- Riverpod
+
+- Feature-First (Project Structure)
+
+
+## Screenshots
+
+
+
+
+## IDE Version
+
+- Flutter version 3.10.6 on channel stable
+- Dart version 3.0.6
+- DevTools 2.23.1
