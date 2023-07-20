@@ -22,7 +22,7 @@ Go to the project directory and get third part packages
 
 ## Tech Stack
 
-**Client:** Flutter, Riverpod
+**Client:** Flutter, Riverpod, Hooks, GoRouter, Dio, Freezed, Logger
 
 
 
