@@ -38,7 +38,13 @@ class SplashPage extends HookConsumerWidget {
     );
     return const Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FlutterLogo(size: 80),
+            CircularProgressIndicator(),
+          ],
+        ),
       ),
     );
   }

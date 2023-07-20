@@ -23,11 +23,11 @@ class HomePageStateNotifier extends StateNotifier<HomePageState> {
     try {
       final data = await articleRepository.getArticles();
       if (data != null) {
-        logger.i('success');
         state = state.copyWith(
           isLoading: false,
           data: data,
         );
+        logger.i('success');
       } else {
         state = state.copyWith(
           isLoading: false,

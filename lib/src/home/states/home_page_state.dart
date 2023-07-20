@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:media_probe/src/home/home.dart';
+
+import 'package:media_probe/src/home/home.dart' show ArticleModel;
 
 part 'home_page_state.freezed.dart';
 

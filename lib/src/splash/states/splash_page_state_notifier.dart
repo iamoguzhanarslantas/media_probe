@@ -10,7 +10,7 @@ class SplashPageStateNotifier extends StateNotifier<SplashPageState> {
     try {
       logger.i('initializeApp');
       state = SplashPageState.init();
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 3));
       state = state.copyWith(appInitialized: true);
     } catch (e) {
       logger.e(e);

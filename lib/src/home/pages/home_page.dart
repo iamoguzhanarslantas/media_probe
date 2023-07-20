@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:media_probe/src/common/common.dart' show GetDate;
+import 'package:media_probe/src/common/common.dart' show GetDate, logger;
 import 'package:media_probe/src/home/home.dart'
     show DetailPage, homePageStateNotifierProvider;
 
@@ -38,10 +38,10 @@ class HomePage extends ConsumerWidget {
                                     title: data.title ?? '',
                                     byline: data.byline ?? '',
                                     imageUrl:
-                                        data.media?[0]?.mediaMetadata[0].url ??
+                                        data.media?[0]?.mediaMetadata[2].url ??
                                             '',
                                     publishedDate:
-                                        data.publishedDate.toString(),
+                                        data.publishedDate.toString().getDate,
                                   ),
                                 ),
                               );
@@ -71,11 +71,15 @@ class HomePage extends ConsumerWidget {
                                 data.media?[0]?.mediaMetadata[0].url ??
                                     'assets/images/white.png',
                               ),
+                              backgroundColor: Colors.grey,
+                              onBackgroundImageError: (exception, stackTrace) {
+                                logger.e(exception);
+                              },
                             ),
                           ),
                         );
                       },
-                      itemCount: fetchData.data!.length - 15,
+                      itemCount: fetchData.data!.length,
                     ),
                   ),
                 ],
