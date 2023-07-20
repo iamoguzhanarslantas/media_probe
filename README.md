@@ -38,7 +38,9 @@ Go to the project directory and get third part packages
 
 ## Screenshots
 
-
+![Emulator Screenshot - Pixel 2 - 2023-07-20 at 11 47 57](https://github.com/iamoguzhanarslantas/media_probe/blob/master/assets/Screenshot_1.png)
+![Emulator Screenshot - Pixel 2 - 2023-07-20 at 11 52 18](https://github.com/iamoguzhanarslantas/media_probe/blob/master/assets/Screenshot_2.png)
+![Emulator Screenshot - Pixel 2 - 2023-07-20 at 11 52 34](https://github.com/iamoguzhanarslantas/media_probe/blob/master/assets/Screenshot_3.png)
 
 
 ## IDE Version
