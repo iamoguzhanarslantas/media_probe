@@ -29,7 +29,7 @@ Go to the project directory and get third part packages
 
 ## Technical Features
 
-- MVC
+- MVVM
 
 - Riverpod
 
